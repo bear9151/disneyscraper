@@ -20,4 +20,6 @@
 * This [assignment](https://github.com/UCF-Coding-Boot-Camp/01-2017-VW-Class-Content/blob/master/Homework/Week-16/Instructions/homework_instructions.md) was completed as part of the *UCF Coding Bootcamp*, and focuses on the following languages/skills:
   * Express Routing
   * Express Handlebars
-  * mongo Databases
+  * mongoDB
+  * Mongoose
+  * Cheerio
