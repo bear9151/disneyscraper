@@ -3,13 +3,19 @@ $.getJSON("/articles", function(data) {
   // For each one
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
-    $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+    // $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+
+    var title = data[i].title;
+    var href = data[i].link;
+    var id = data[i]._id;
+
+    $("#articles").append('<div class="row"><div class="col s12"><div class="card blue-grey darken-1"><div class="card-content white-text"><span class="card-title">' + title + '</span><p data-id=' + id + '>' + href + '</p></div><div class="card-action"><a data-id=' + id + '>Comment</a><a>Bookmark</a></div></div></div></div>');
   }
 });
 
 
-// Whenever someone clicks a p tag
-$(document).on("click", "p", function() {
+// Whenever someone clicks a comment link tag
+$(document).on("click", "a", function() {
   // Empty the notes from the note section
   $("#notes").empty();
   // Save the id from the p tag
@@ -79,5 +85,6 @@ $(document).on("click", "#scrapenow", function() {
         url: "/scrape"
     }).done(function(data) {
         console.log(data);
+        location.reload();
     })
 });

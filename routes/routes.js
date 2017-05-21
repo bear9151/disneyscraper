@@ -7,7 +7,7 @@ var cheerio = require("cheerio");
 
 var router = express.Router();
 
-// Import the model (cat.js) to use its database functions.
+// Import the model to use its database functions.
 var Article = require("../models/Article.js");
 var Note = require("../models/Note.js");
 
@@ -17,7 +17,7 @@ router.get("/scrape", function(req, res) {
     request("https://disneyparks.disney.go.com/blog/latest-stories/", function(error, response, html) {
         // Then, we load that into cheerio and save it to $ for a shorthand selector
         var $ = cheerio.load(html);
-        // Now, we grab every h2 within an article tag, and do the following:
+        // Now, we grab every h5 within an article tag, and do the following:
         $("h5").each(function(i, element) {
 
             // Save an empty result object
