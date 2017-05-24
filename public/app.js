@@ -9,13 +9,13 @@ $.getJSON("/articles", function(data) {
     var href = data[i].link;
     var id = data[i]._id;
 
-    $("#articles").append('<div class="row"><div class="col s12"><div class="card blue-grey darken-1"><div class="card-content white-text"><span class="card-title">' + title + '</span><p data-id=' + id + '>' + href + '</p></div><div class="card-action"><a data-id=' + id + '>Comment</a><a>Bookmark</a></div></div></div></div>');
+    $("#articles").append('<div class="row"><div class="col s12"><div class="card blue-grey darken-1"><div class="card-content white-text"><span class="card-title">' + title + '</span><p data-id=' + id + '>' + href + '</p></div><div class="card-action"><a data-id=' + id + ' class="commentbtn">Comment</a><a class="bookmarkbtn">Bookmark</a></div></div></div></div>');
   }
 });
 
 
 // Whenever someone clicks a comment link tag
-$(document).on("click", "a", function() {
+$(document).on("click", ".commentbtn", function() {
   // Empty the notes from the note section
   $("#titleinput").empty();
   $("#bodyinput").empty();
@@ -95,4 +95,40 @@ $(document).on("click", "#scrapenow", function() {
 $(document).ready(function(){
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
+});
+
+// Whenever someone clicks a bookmark
+$(document).on("click", ".bookmarkbtn", function() {
+    // Empty the notes from the note section
+    $("#titleinput").empty();
+    $("#bodyinput").empty();
+    // Save the id from the a tag
+    var thisId = $(this).attr("data-id");
+
+    // Now make an ajax call for the Article
+    $.ajax({
+        method: "GET",
+        url: "/articles/" + thisId
+    })
+    // With that done, add the note information to the page
+    //     .done(function(data) {
+    //         console.log(data);
+    //         $('#modal1').modal('open');
+    //         // The title of the article
+    //         $("#modaltitle").text(data.title);
+    //         // An input to enter a new title
+    //         // $("#titleinput").append("<input id='titleinput' name='title' >");
+    //         // // A textarea to add a new note body
+    //         // $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
+    //         // // A button to submit a new note, with the id of the article saved to it
+    //         $("#savenote").attr("data-id", data._id);
+    //
+    //         // If there's a note in the article
+    //         if (data.note) {
+    //             // Place the title of the note in the title input
+    //             $("#titleinput").val(data.note.title);
+    //             // Place the body of the note in the body textarea
+    //             $("#bodyinput").val(data.note.body);
+    //         }
+    //     });
 });
